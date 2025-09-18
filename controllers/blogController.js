@@ -1,4 +1,5 @@
 const Blog = require("../models/blog");
+const path = require("path")
 
 // blog_index
 const blog_index = (req, res) => {
@@ -24,14 +25,15 @@ const blog_details = (req, res) => {
     });
 };
 
-// blog_create_get
-// const blog_create_get = (req, res) => {
-
-// };
 
 // blog_create_post
 const blog_create_post = (req, res) => {
-  const blog = new Blog(req.body);
+  const blog = new Blog({
+    title: req.body.title,
+    snippet: req.body.snippet,
+    body: req.body.body,
+    image: req.file ? req.file.filename : null, // save filename
+  });
 
   blog
     .save()

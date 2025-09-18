@@ -15,6 +15,9 @@ const blogSchema = new Schema(
       type: String,
       required: true,
     },
+    image: {
+        type: String, // store filename
+    },
   },
   { timestamps: true }
 );

@@ -1,0 +1,240 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+
+  <body>
+    <%- include("./partials/header.ejs") %>
+
+    <main class="container">
+      <section id="home" class="hero">
+        <div>
+          <h2>Enjoy Your Healthy<br />Delicious Food</h2>
+          <p>
+            We provide creative, nutritious and cost effective catering
+            solutions across Nairobi & East Africa. Book us for private or
+            corporate events.
+          </p>
+          <a class="cta" href="#contact">Book an event</a>
+          <div style="margin-top: 18px; color: var(--muted)">
+            <strong>Phone:</strong> +254 724 147 654 &nbsp; · &nbsp;
+            <strong>Email:</strong> kijijicorporatecuisine@gmail.com
+          </div>
+        </div>
+        <div class="mascot card">
+          <div>
+            <img
+              src="https://via.placeholder.com/320x220.png?text=Food+Shot"
+              alt="hero"
+              style="width: 100%; border-radius: 8px; display: block"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section id="about">
+        <h3>About Us</h3>
+        <p style="color: var(--muted)">
+          Kijiji Cuisine Group Ltd is a Kenya based business with 10 years of
+          experience in providing catering experiences for individual and
+          corporate events. Our commercial kitchen is located at Kahawa Sukari,
+          Thika road in Nairobi.
+        </p>
+        <div class="grid-3" style="margin-top: 12px">
+          <div class="card">
+            <h4>Private & Corporate Events</h4>
+            <p style="color: var(--muted); margin: 8px 0 0">
+              We cater for birthday parties, weddings, conferences and corporate
+              meetings.
+            </p>
+          </div>
+          <div class="card">
+            <h4>Flexible Menus</h4>
+            <p style="color: var(--muted); margin: 8px 0 0">
+              Platinum, Gold, Bronze packages plus snacks, canapés and custom
+              menus for dietary needs.
+            </p>
+          </div>
+          <div class="card">
+            <h4>Professional Staff</h4>
+            <p style="color: var(--muted); margin: 8px 0 0">
+              Experienced chefs and service teams focused on timely deliveries
+              and quality presentation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="menu">
+        <h3>Our Menu</h3>
+        <p style="color: var(--muted); margin-bottom: 12px">
+          Select a category to expand sample items and rates.
+        </p>
+
+        <div class="menu-list">
+          <div class="menu-cat card">
+            <button onclick="togglePanel(this)">
+              Platinum — Breakfast & Buffet
+            </button>
+            <div class="panel">
+              <strong>Breakfast</strong>
+              <ul>
+                <li>Assorted fruit basket</li>
+                <li>Tropical juices</li>
+                <li>Cornflakes, oats</li>
+              </ul>
+              <strong>Buffet</strong>
+              <ul>
+                <li>Appetizers, Salad bar</li>
+                <li>Hot chafing dishes (Proteins, Starches, Veggies)</li>
+                <li>Desserts & Soft drinks</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="menu-cat card">
+            <button onclick="togglePanel(this)">
+              Gold — Breakfast & Buffet
+            </button>
+            <div class="panel">
+              <p>
+                Similar to Platinum with slightly different pricing and item
+                selection (cold cuts, pastries).
+              </p>
+            </div>
+          </div>
+
+          <div class="menu-cat card">
+            <button onclick="togglePanel(this)">
+              Bronze — Light Breakfast & Buffet
+            </button>
+            <div class="panel">
+              <p>Bagels, waffles, avocado toast, light buffet options.</p>
+            </div>
+          </div>
+
+          <div class="menu-cat card">
+            <button onclick="togglePanel(this)">Snacks & Canapés</button>
+            <div class="panel">
+              <ul>
+                <li>Chicken & beef samosas, veggie spring rolls</li>
+                <li>Mini mandazis, muffins, kebabs, mini desserts</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="testimonials">
+        <h3>Testimonials</h3>
+        <div class="card testi" style="margin-top: 10px">
+          <img src="https://via.placeholder.com/80.png?text=F" alt="avatar" />
+          <div>
+            <strong>Fay Favourite</strong>
+            <p style="color: var(--muted); margin: 6px 0 0">
+              "The best cuisine crew in town... I just love how you will lick
+              your fingers after a meal cooked by them. Bravo Kijiji Cuisine."
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery">
+        <h3>Gallery</h3>
+        <div class="gallery" id="galleryGrid">
+          <!-- JS will populate sample images -->
+        </div>
+      </section>
+
+      <section id="contact">
+        <h3>Book an Event</h3>
+        <p style="color: var(--muted)">
+          Fill out the form and we'll call or email to confirm your reservation.
+        </p>
+
+        <div class="card" style="margin-top: 10px">
+          <form id="bookingForm" onsubmit="handleBooking(event)">
+            <div class="row">
+              <input name="name" placeholder="Full name" required />
+              <input name="phone" placeholder="Phone number" required />
+            </div>
+            <div style="margin-top: 8px">
+              <input name="email" placeholder="Email (optional)" />
+            </div>
+            <div style="margin-top: 8px">
+              <select name="package">
+                <option value="platinum">Platinum</option>
+                <option value="gold">Gold</option>
+                <option value="bronze">Bronze</option>
+              </select>
+            </div>
+            <div style="margin-top: 8px">
+              <textarea
+                name="details"
+                rows="4"
+                placeholder="Event details (date, number of guests, location)"
+              ></textarea>
+            </div>
+            <div
+              style="
+                margin-top: 12px;
+                display: flex;
+                gap: 10px;
+                align-items: center;
+              "
+            >
+              <button class="btn" type="submit">Send Booking</button>
+              <div id="bookingMsg" style="color: var(--muted)"></div>
+            </div>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <%- include("./partials/footer.ejs") %>
+
+    <script>
+      // Populate gallery with placeholders
+      (function () {
+        const gallery = document.getElementById("galleryGrid");
+        const count = 12;
+        for (let i = 1; i <= count; i++) {
+          const img = document.createElement("img");
+          img.src = "https://picsum.photos/seed/kijiji" + i + "/600/400";
+          img.alt = "Gallery " + i;
+          gallery.appendChild(img);
+        }
+      })();
+
+      function togglePanel(btn) {
+        const panel = btn.nextElementSibling;
+        if (!panel) return;
+        const open = panel.style.display === "block";
+        document
+          .querySelectorAll(".menu-cat .panel")
+          .forEach((p) => (p.style.display = "none"));
+        if (!open) panel.style.display = "block";
+      }
+
+      function handleBooking(e) {
+        e.preventDefault();
+        const form = e.currentTarget;
+        const data = Object.fromEntries(new FormData(form).entries());
+        const msg = document.getElementById("bookingMsg");
+        msg.textContent = "Loading";
+        setTimeout(() => {
+          msg.textContent =
+            "Your booking request was sent. We will call or send an email to confirm. Thank you!";
+          form.reset();
+        }, 800);
+      }
+
+      // menu toggle
+
+      const hamburger = document.getElementById("hamburger");
+      const navLinks = document.getElementById("nav-links");
+
+      hamburger.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+      });
+    </script>
+  </body>
+</html>

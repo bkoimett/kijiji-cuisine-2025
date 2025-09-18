@@ -1,30 +1,39 @@
 <html lang="en">
-<%- include("./partials/head.ejs") %>
+  <%- include("./partials/head.ejs") %>
 
-<body>
-  <%- include("./partials/nav.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
 
-  <div class="blogs content">
-    <h2>All Blogs</h2>
+    <main class="container" style="text-decoration: none">
+      <div class="blogs content">
+        <h2>All Blogs</h2>
 
-    <% if (blogs.length > 0) { %>
-      <% blogs.forEach(blog => { %>
+        <% if (blogs.length > 0) { %>
+        <div class="grid-3">
+          <% blogs.forEach(blog => { %>
+          <a class="card blog-card" href="/blogs/<%= blog._id %>">
+            <% if (blog.image) { %>
+            <img src="/uploads/<%= blog.image %>" alt="<%= blog.title %>" />
+            <% } else { %>
+            <img
+              src="https://via.placeholder.com/400x250.png?text=No+Image"
+              alt="No image available"
+            />
+            <% } %>
 
-        <a class='single' href="/blogs/<%= blog._id %>">
-            <h3 class="title"><%= blog.title %></h3>
-            <p class="snippet"><%= blog.snippet %></p>
-            <!-- <% if (blog.image) { %>
-                <img src="/uploads/<%= blog.image %>" width="50">
-            <% } %> -->
-        </a>
+            <div class="card-content">
+              <h4><%= blog.title %></h4>
+              <p class="snippet"><%= blog.snippet %></p>
+            </div>
+          </a>
+          <% }) %>
+        </div>
+        <% } else { %>
+        <p>There are no blogs to display...</p>
+        <% } %>
+      </div>
+    </main>
 
-      <% }) %>
-    <% } else { %>
-      <p>There are no blogs to display...</p>
-    <% } %>
-    
-  </div>
 
-  <%- include("./partials/footer.ejs") %>
-</body>
+  </body>
 </html>

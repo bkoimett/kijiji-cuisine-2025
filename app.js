@@ -24,7 +24,7 @@ app.use(morgan("dev"));
 
 // route handlers
 app.get("/", (req, res) => {
-  res.redirect("/blogs");
+  res.render("home", { title: "Home" });
 });
 
 app.get("/about", (req, res) => {

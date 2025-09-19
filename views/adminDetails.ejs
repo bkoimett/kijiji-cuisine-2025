@@ -1,0 +1,71 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <main class="container">
+      <article class="card">
+        <!-- Blog Image -->
+        <!-- <div class="card-image large <%= blog.image ? '' : 'no-img' %>"
+             style="background-image:url(<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/800x400.png?text=No+Image' %>)">
+        </div> -->
+        <div
+          class="card-image"
+          data-bg="<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/200x150.png?text=No+Image' %>"
+        ></div>
+
+        <!-- Blog Content -->
+        <div class="card-content">
+          <h2><%= blog.title %></h2>
+          <p class="muted">
+            <!-- By <%= blog.author %> | <%= blog.createdAt.toDateString() %> -->
+            By Alex Milenye | <%= blog.createdAt.toDateString() %>
+          </p>
+          <p><%= blog.snippet %></p>
+          <p><%= blog.body %></p>
+        </div>
+      </article>
+
+      <a href="/blogs" class="btn">← Back to Blogs</a>
+
+      <a href="#" class="delete" data-doc="<%= blog._id %>">
+        <img
+          src="/trash.png"
+          alt="delete"
+          style="width: 18px; vertical-align: middle; margin-right: 6px"
+        />
+        Delete
+      </a>
+    </main>
+
+    <script>
+      const trashcan = document.querySelector("a.delete");
+
+      trashcan.addEventListener("click", (e) => {
+        e.preventDefault(); // stop normal link navigation
+
+        const endpoint = `/blogs/${trashcan.dataset.doc}`;
+
+        fetch(endpoint, { method: "DELETE" })
+          .then((response) => response.json())
+          .then((data) => (window.location.href = data.redirect))
+          .catch((err) => console.log(err));
+      });
+
+      // images
+      document.querySelectorAll(".card-image").forEach((div) => {
+        const bg = div.getAttribute("data-bg");
+        if (bg) div.style.backgroundImage = `url(${bg})`;
+      });
+
+      // menu toggle
+
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("nav-menu");
+
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("show");
+      });
+    </script>
+  </body>
+</html>

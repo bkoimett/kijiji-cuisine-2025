@@ -26,8 +26,32 @@
       </article>
 
       <a href="/blogs" class="btn">← Back to Blogs</a>
+
+      <a href="#" class="delete" data-doc="<%= blog._id %>">
+        <img
+          src="/trash.png"
+          alt="delete"
+          style="width: 18px; vertical-align: middle; margin-right: 6px"
+        />
+        Delete
+      </a>
     </main>
+
     <script>
+      const trashcan = document.querySelector("a.delete");
+
+      trashcan.addEventListener("click", (e) => {
+        e.preventDefault(); // stop normal link navigation
+
+        const endpoint = `/blogs/${trashcan.dataset.doc}`;
+
+        fetch(endpoint, { method: "DELETE" })
+          .then((response) => response.json())
+          .then((data) => (window.location.href = data.redirect))
+          .catch((err) => console.log(err));
+      });
+
+      // images
       document.querySelectorAll(".card-image").forEach((div) => {
         const bg = div.getAttribute("data-bg");
         if (bg) div.style.backgroundImage = `url(${bg})`;

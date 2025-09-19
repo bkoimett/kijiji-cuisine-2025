@@ -319,3 +319,50 @@ footer {
 .create-blog button:hover {
   background: #555;
 }
+
+/* buttons - details ejs */
+
+/* General button style */
+.btn,
+.delete {
+  display: inline-block;
+  padding: 10px 16px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+/* Back button (accent color) */
+.btn {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+}
+.btn:hover {
+  background: #a83620;
+  transform: translateY(-2px);
+}
+
+/* Delete button (danger/red) */
+.delete {
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  margin-left: 10px;
+}
+.delete:hover {
+  background: black;
+  transform: translateY(-2px);
+}
+
+/* Optional: delete button with icon */
+.delete img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+  vertical-align: middle;
+  margin-right: 6px;
+  filter: invert(1); /* makes icon white */
+}

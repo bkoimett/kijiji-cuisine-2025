@@ -4,50 +4,36 @@
     <%- include("./partials/nav.ejs") %>
 
     <main class="container">
-      <h2>Welcome Back - All Blogs</h2>
+      <h2>Admin Dashboard</h2>
+      <a href="/create" class="btn">+ New Blog</a>
 
       <% if (blogs.length > 0) { %>
       <div class="grid-3">
         <% blogs.forEach(blog => { %>
-        <a
-          href="/blogs/<%= blog._id %>"
-          class="card"
-          style="text-decoration: none; color: inherit"
-        >
-          <!-- Card Image -->
+        <div class="card">
           <div
             class="card-image"
             data-bg="<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/200x150.png?text=No+Image' %>"
           ></div>
 
-          <!-- Card Content -->
           <div class="card-content">
-            <p class="muted">
-              By Alex Milenye | <%= blog.createdAt.toDateString() %>
-              <!-- By <%= blog.author %> | <%= blog.createdAt.toDateString() %> -->
-            </p>
             <h3><%= blog.title %></h3>
             <p class="snippet"><%= blog.snippet %></p>
+            <a href="/blogs/<%= blog._id %>" class="btn">View</a>
+            <form
+              action="/blogs/<%= blog._id %>?_method=DELETE"
+              method="POST"
+              style="display: inline"
+            >
+              <button type="submit" class="delete">Delete</button>
+            </form>
           </div>
-        </a>
+        </div>
         <% }) %>
       </div>
       <% } else { %>
-      <p>There are no blogs to display...</p>
+      <p>No blogs created yet.</p>
       <% } %>
     </main>
-    <script>
-      document.querySelectorAll(".card-image").forEach((div) => {
-        const bg = div.getAttribute("data-bg");
-        if (bg) div.style.backgroundImage = `url(${bg})`;
-      });
-
-      const hamburger = document.getElementById("hamburger");
-      const navMenu = document.getElementById("nav-menu");
-
-      hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("show");
-      });
-    </script>
   </body>
 </html>

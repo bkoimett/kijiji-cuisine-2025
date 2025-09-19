@@ -19,7 +19,7 @@
           <div class="card-content">
             <h3><%= blog.title %></h3>
             <p class="snippet"><%= blog.snippet %></p>
-            <a href="/blogs/<%= blog._id %>" class="btn">View</a>
+            <!-- <a href="/details/<%= blog._id %>" class="btn">View</a> -->
             <form
               action="/blogs/<%= blog._id %>?_method=DELETE"
               method="POST"

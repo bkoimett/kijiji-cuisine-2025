@@ -25,7 +25,6 @@ const blog_details = (req, res) => {
     });
 };
 
-
 // blog_create_post
 const blog_create_post = (req, res) => {
   const blog = new Blog({
@@ -51,7 +50,7 @@ const blog_delete = (req, res) => {
 
   Blog.findByIdAndDelete(id)
     .then((result) => {
-      res.json({ redirect: "/blogs" });
+      res.redirect("/blogs");
     })
     .catch((err) => console.log(err));
 };

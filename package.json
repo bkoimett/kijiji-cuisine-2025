@@ -21,6 +21,7 @@
     "bcrypt": "^6.0.0",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-session": "^1.18.2",
     "lodash": "^4.17.21",
     "mongodb": "^6.19.0",
     "mongoose": "^8.18.1",

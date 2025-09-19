@@ -1,0 +1,53 @@
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%- include("./partials/nav.ejs") %>
+
+    <main class="container">
+      <h2>Welcome Back - All Blogs</h2>
+
+      <% if (blogs.length > 0) { %>
+      <div class="grid-3">
+        <% blogs.forEach(blog => { %>
+        <a
+          href="/blogs/<%= blog._id %>"
+          class="card"
+          style="text-decoration: none; color: inherit"
+        >
+          <!-- Card Image -->
+          <div
+            class="card-image"
+            data-bg="<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/200x150.png?text=No+Image' %>"
+          ></div>
+
+          <!-- Card Content -->
+          <div class="card-content">
+            <p class="muted">
+              By Alex Milenye | <%= blog.createdAt.toDateString() %>
+              <!-- By <%= blog.author %> | <%= blog.createdAt.toDateString() %> -->
+            </p>
+            <h3><%= blog.title %></h3>
+            <p class="snippet"><%= blog.snippet %></p>
+          </div>
+        </a>
+        <% }) %>
+      </div>
+      <% } else { %>
+      <p>There are no blogs to display...</p>
+      <% } %>
+    </main>
+    <script>
+      document.querySelectorAll(".card-image").forEach((div) => {
+        const bg = div.getAttribute("data-bg");
+        if (bg) div.style.backgroundImage = `url(${bg})`;
+      });
+
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("nav-menu");
+
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("show");
+      });
+    </script>
+  </body>
+</html>

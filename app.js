@@ -1,11 +1,14 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
-const path = require('path')
-const bcyrpt = require('bcrypt')
+const path = require("path");
+const bcrypt = require("bcrypt");
 
 // module imports
 const blogRoutes = require("./routes/blogRoutes");
+const Blog = require("./models/blog");
+const auth = require("./models/auth");
+const { title } = require("process");
 
 // express app initialisation
 const app = express();
@@ -23,7 +26,7 @@ app.set("view engine", "ejs");
 
 // middleware and static - for all req including post
 app.use(express.static("public"));
-app.use(express.json())
+app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
@@ -36,10 +39,79 @@ app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
 });
 
-app.get("/admin", (req,res) => {
-  res.render("login", { title: "Login"})
-})
+// logins
+app.get("/login", (req, res) => {
+  res.render("login", { title: "Login" });
+});
 
+app.get("/signup", (req, res) => {
+  res.render("signup", { title: "SignUp" });
+});
+
+// registration route
+app.post("/signup", async (req, res) => {
+  const auths = new auth({
+    name: req.body.username,
+    password: req.body.password,
+  });
+
+  const existingUser = await auth.findOne({ name: auths.name });
+  if (existingUser) {
+    return res.render("signup", {
+      error: "User already exists. Please choose a different username.",
+    });
+  } else {
+    // hash passwords with bcrypt
+    const saltRounds = 10;
+    const hashedPassword = await bcrypt.hash(auths.password, saltRounds);
+
+    auths.password = hashedPassword; // replace the hash password with original password
+
+    try {
+      const result = await auths.save();
+      res.redirect("/login");
+    } catch (err) {
+      console.log(err);
+      res.render("signup", {
+        error: "Error creating user. Please try again.",
+      });
+    }
+  }
+});
+
+// Login user
+app.post("/login", async (req, res) => {
+  try {
+    const check = await auth.findOne({ name: req.body.username }); // ✅ use model
+    if (!check) {
+      return res.render("login", {
+        error: "User not found. Please sign up first.",
+      });
+    }
+
+    // Compare password
+    const isPasswordMatch = await bcrypt.compare(
+      req.body.password,
+      check.password
+    );
+    if (!isPasswordMatch) {
+      return res.render("login", {
+        error: "Wrong password. Please try again.",
+      });
+    }
+
+    // Successful login -> fetch blogs for admin
+    const blogs = await Blog.find().sort({ createdAt: -1 });
+    return res.render("admin", { title: "Admin", blogs });
+  } catch (err) {
+    console.error(err);
+    return res.render("login", {
+      error: "Something went wrong. Please try again.",
+    });
+  }
+});
+
+// create
 app.get("/create", (req, res) => {
   res.render("create", { title: "Create a new blog" });
 });

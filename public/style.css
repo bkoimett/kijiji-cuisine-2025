@@ -122,9 +122,15 @@ nav a {
   text-decoration: none;
 }
 .hero .mascot {
-  background: #eee;
+  background-image: url("/clients.PNG");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  position: relative;
+  padding: 0px 0;
+  /* background: red; */
   border-radius: 12px;
-  min-height: 220px;
+  min-height: 250px;
   display: flex;
   align-items: center;
   justify-content: center;

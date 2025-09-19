@@ -5,7 +5,8 @@
 
     <main class="container">
       <h2>Admin Dashboard</h2>
-      <a href="/create" class="btn">+ New Blog</a>
+      <a href="/admin/blogs/create" class="btn">+ New Blog</a>
+      <!-- ✅ FIXED -->
 
       <% if (blogs.length > 0) { %>
       <div class="grid-3">
@@ -19,9 +20,13 @@
           <div class="card-content">
             <h3><%= blog.title %></h3>
             <p class="snippet"><%= blog.snippet %></p>
-            <!-- <a href="/details/<%= blog._id %>" class="btn">View</a> -->
+
+            <!-- View (optional for admin, can link to edit instead) -->
+            <!-- <a href="/admin/blogs/<%= blog._id %>/edit" class="btn">Edit</a> -->
+
+            <!-- ✅ FIXED: delete via /admin/blogs/:id -->
             <form
-              action="/blogs/<%= blog._id %>?_method=DELETE"
+              action="/admin/blogs/<%= blog._id %>?_method=DELETE"
               method="POST"
               style="display: inline"
             >

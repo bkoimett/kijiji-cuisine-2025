@@ -9,6 +9,7 @@ const session = require("express-session");
 // module imports
 const blogRoutes = require("./routes/blogRoutes");
 const authRoutes = require("./routes/authRoutes");
+const adminRoutes = require("./routes/adminRoutes");
 const Blog = require("./models/blog");
 const auth = require("./models/auth");
 const { title } = require("process");
@@ -39,6 +40,9 @@ app.get("/", (req, res) => {
 app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
 });
+
+// admin routes
+app.use("/admin", adminRoutes);
 
 // authentication routes
 app.use(authRoutes);

@@ -1,45 +1,26 @@
-// const express = require("express");
-// const router = express.Router();
-// const adminController = require("../controllers/adminController");
+const express = require("express");
+const router = express.Router();
+const {
+  admin_dashboard,
+  blog_create_get,
+  blog_create_post,
+  blog_edit_get,
+  blog_update,
+  blog_delete,
+} = require("../controllers/adminController");
 
-// // all admin routes are protected
-// router.get(
-//   "/admin",
-//   adminController.requireAuth,
-//   adminController.admin_dashboard
-// );
+// Admin dashboard
+router.get("/blogs", admin_dashboard);
 
-// // create blog
-// router.get(
-//   "/admin/blogs/create",
-// //   adminController.requireAuth,
-//   adminController.blog_create_get
-// );
-// router.post(
-//   "/admin/blogs",
-//   adminController.requireAuth,
-//   adminController.blog_create_post
-// );
+// Create blog
+router.get("/blogs/create", blog_create_get);
+router.post("/blogs", blog_create_post);
 
-// // edit blog
-// router.get(
-//   "/admin/blogs/:id/edit",
-//   adminController.requireAuth,
-//   adminController.blog_edit_get
-// );
-// router.post(
-//   "/admin/blogs/:id",
-//   adminController.requireAuth,
-//   adminController.blog_update
-// ); // if using POST override
-// // OR router.put("/admin/blogs/:id", adminController.requireAuth, adminController.blog_update);
+// Edit blog
+router.get("/blogs/:id/edit", blog_edit_get);
+router.put("/blogs/:id", blog_update);
 
-// // delete blog
-// router.post(
-//   "/admin/blogs/:id/delete",
-//   adminController.requireAuth,
-//   adminController.blog_delete
-// );
-// // OR router.delete("/admin/blogs/:id", adminController.requireAuth, adminController.blog_delete);
+// Delete blog
+router.delete("/blogs/:id", blog_delete);
 
-// module.exports = router;
+module.exports = router;

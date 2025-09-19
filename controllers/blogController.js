@@ -50,7 +50,7 @@ const blog_delete = (req, res) => {
 
   Blog.findByIdAndDelete(id)
     .then((result) => {
-      res.redirect("/blogs");
+      res.redirect("/admin/blogs");
     })
     .catch((err) => console.log(err));
 };

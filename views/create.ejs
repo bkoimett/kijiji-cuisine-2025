@@ -4,7 +4,7 @@
   <body>
     <%- include("./partials/nav.ejs") %>
 
-    <main class="container">
+    <main class="form-container" style="margin-top: 20px">
       <div class="create-blog content">
         <form action="/blogs" method="POST" enctype="multipart/form-data">
           <label for="title">Blog title:</label>
@@ -12,10 +12,26 @@
           <label for="snippet">Blog snippet:</label>
           <input type="text" id="snippet" name="snippet" required />
           <label for="body">Blog body:</label>
-          <textarea id="body" name="body" required></textarea>
+          <textarea
+            id="body"
+            name="body"
+            style="height: 150px"
+            required
+          ></textarea>
           <input type="file" name="image" /><br /><br />
           <button class="btn" style="background-color: crimson">Submit</button>
         </form>
+        <div
+          style="
+            margin: 20px;
+            color: var(--muted);
+            text-align: center;
+            font-size: 12px;
+          "
+        >
+          © Kijiji Cuisine - 2025 <br />
+          www.kijijicorporatecuisine.co.ke
+        </div>
       </div>
     </main>
 

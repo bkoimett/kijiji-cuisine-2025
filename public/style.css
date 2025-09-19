@@ -285,9 +285,17 @@ footer {
 }
 
 /* Create Blog Form */
+.form-container {
+  width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
 .create-blog {
-  padding-bottom: 20px;
-  border: 1px solid #ddd;
+  padding-bottom: 15px;
+  /* border: 1px solid #ddd; */
 }
 .create-blog form {
   display: flex;
@@ -310,7 +318,7 @@ footer {
 }
 
 .create-blog button {
-  margin-top: 15px;
+  margin-top: 5px;
   padding: 10px;
   background: #333;
   color: #fff;

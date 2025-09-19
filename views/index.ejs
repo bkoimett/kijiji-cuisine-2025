@@ -1,39 +1,43 @@
 <html lang="en">
   <%- include("./partials/head.ejs") %>
-
   <body>
     <%- include("./partials/nav.ejs") %>
 
-    <main class="container" style="text-decoration: none">
-      <div class="blogs content">
-        <h2>All Blogs</h2>
+    <main class="container">
+      <h2>All Blogs</h2>
 
-        <% if (blogs.length > 0) { %>
-        <div class="grid-3">
-          <% blogs.forEach(blog => { %>
-          <a class="card blog-card" href="/blogs/<%= blog._id %>">
-            <% if (blog.image) { %>
-            <img src="/uploads/<%= blog.image %>" alt="<%= blog.title %>" />
-            <% } else { %>
-            <img
-              src="https://via.placeholder.com/400x250.png?text=No+Image"
-              alt="No image available"
-            />
-            <% } %>
+      <% if (blogs.length > 0) { %>
+      <div class="grid-3">
+        <% blogs.forEach(blog => { %>
+        <a
+          href="/blogs/<%= blog._id %>"
+          class="card"
+          style="text-decoration: none; color: inherit"
+        >
+          <!-- Card Image -->
+          <div
+            class="card-image"
+            data-bg="<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/200x150.png?text=No+Image' %>"
+          ></div>
 
-            <div class="card-content">
-              <h4><%= blog.title %></h4>
-              <p class="snippet"><%= blog.snippet %></p>
-            </div>
-          </a>
-          <% }) %>
-        </div>
-        <% } else { %>
-        <p>There are no blogs to display...</p>
-        <% } %>
+          <!-- Card Content -->
+          <div class="card-content">
+            <div class="category">Kijiji Blog</div>
+            <h3><%= blog.title %></h3>
+            <p class="snippet"><%= blog.snippet %></p>
+          </div>
+        </a>
+        <% }) %>
       </div>
+      <% } else { %>
+      <p>There are no blogs to display...</p>
+      <% } %>
     </main>
-
-
+    <script>
+      document.querySelectorAll(".card-image").forEach((div) => {
+        const bg = div.getAttribute("data-bg");
+        if (bg) div.style.backgroundImage = `url(${bg})`;
+      });
+    </script>
   </body>
 </html>

@@ -1,38 +1,36 @@
 <html lang="en">
   <%- include("./partials/head.ejs") %>
-
   <body>
     <%- include("./partials/nav.ejs") %>
 
-    <div class="details content">
-      <h2><%= blog.title %></h2>
-      <div class="content">
-        <p><%= blog.body %></p>
-      </div>
-      <hr />
-      <% if (blog.image) { %>
-      <img src="/uploads/<%= blog.image %>" width="100" />
-      <% } %>
-      <a class="delete" data-doc="<%= blog._id %>">
-        <img src="/trash.png" width="20" />
-      </a>
-    </div>
+    <main class="container">
+      <article class="card">
+        <!-- Blog Image -->
+        <!-- <div class="card-image large <%= blog.image ? '' : 'no-img' %>"
+             style="background-image:url(<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/800x400.png?text=No+Image' %>)">
+        </div> -->
+        <div
+          class="card-image"
+          data-bg="<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/200x150.png?text=No+Image' %>"
+        ></div>
 
-    <%- include("./partials/footer.ejs") %>
+        <!-- Blog Content -->
+        <div class="card-content">
+          <h2><%= blog.title %></h2>
+          <p class="muted">
+            By <%= blog.author %> | <%= blog.createdAt.toDateString() %>
+          </p>
+          <p><%= blog.snippet %></p>
+          <p><%= blog.body %></p>
+        </div>
+      </article>
 
+      <a href="/blogs" class="btn">← Back to Blogs</a>
+    </main>
     <script>
-      const trashcan = document.querySelector("a.delete");
-
-      // event object as parameter
-      trashcan.addEventListener("click", (e) => {
-        const endpoint = `/blogs/${trashcan.dataset.doc}`;
-
-        fetch(endpoint, {
-          method: "DELETE",
-        })
-          .then((response) => response.json())
-          .then((data) => (window.location.href = data.redirect))
-          .catch((err) => console.log(err));
+      document.querySelectorAll(".card-image").forEach((div) => {
+        const bg = div.getAttribute("data-bg");
+        if (bg) div.style.backgroundImage = `url(${bg})`;
       });
     </script>
   </body>

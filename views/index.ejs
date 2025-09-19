@@ -22,7 +22,10 @@
 
           <!-- Card Content -->
           <div class="card-content">
-            <div class="category">Kijiji Blog</div>
+            <p class="muted">
+              By Alex Milenye | <%= blog.createdAt.toDateString() %>
+              <!-- By <%= blog.author %> | <%= blog.createdAt.toDateString() %> -->
+            </p>
             <h3><%= blog.title %></h3>
             <p class="snippet"><%= blog.snippet %></p>
           </div>

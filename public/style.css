@@ -40,7 +40,6 @@ header {
   width: 54px;
   height: 54px;
   object-fit: cover;
-  border-radius: 8px;
 }
 .brand h1 {
   font-size: 20px;
@@ -286,6 +285,10 @@ footer {
 }
 
 /* Create Blog Form */
+.create-blog {
+  padding-bottom: 20px;
+  border: 1px solid #ddd;
+}
 .create-blog form {
   display: flex;
   flex-direction: column;
@@ -336,6 +339,7 @@ footer {
 
 /* Back button (accent color) */
 .btn {
+  text-align: center;
   background: var(--accent);
   color: #fff;
   border: none;

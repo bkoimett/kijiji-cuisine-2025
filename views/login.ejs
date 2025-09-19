@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <link rel="stylesheet" href="/login.css" />
+    <style>
+      .error-message {
+        color: red;
+        text-align: center;
+        margin-top: 10px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="form-container">
+      <h2>Login</h2>
+      <form action="/login" method="post">
+        <div class="form-group">
+          <label for="username">Name:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your name"
+            required
+            autocomplete="off"
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            name="password"
+            id="password"
+            placeholder="password"
+            required
+          />
+        </div>
+        <button type="submit" class="submit-btn">Login</button>
+      </form>
+
+      <!-- Error message (just like signup) -->
+      <% if (typeof error !== "undefined") { %>
+      <p class="error-message"><%= error %></p>
+      <% } %>
+
+      <div style="margin: 20px; color: var(--muted); text-align: center;font-size: 12px;">
+        © Kijiji Cuisine - 2025 <br>
+        www.kijijicorporatecuisine.co.ke
+      </div>
+      <!-- <p>Don't have an account? <a href="/signup">Sign up</a></p> -->
+    </div>
+  </body>
+</html>

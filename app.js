@@ -1,6 +1,10 @@
 const express = require("express");
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+const path = require('path')
+const bcyrpt = require('bcrypt')
+
+// module imports
 const blogRoutes = require("./routes/blogRoutes");
 
 // express app initialisation
@@ -19,7 +23,8 @@ app.set("view engine", "ejs");
 
 // middleware and static - for all req including post
 app.use(express.static("public"));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 // route handlers
@@ -30,6 +35,10 @@ app.get("/", (req, res) => {
 app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
 });
+
+app.get("/admin", (req,res) => {
+  res.render("login", { title: "Login"})
+})
 
 app.get("/create", (req, res) => {
   res.render("create", { title: "Create a new blog" });

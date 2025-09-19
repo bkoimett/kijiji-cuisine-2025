@@ -59,6 +59,45 @@ nav a {
   font-weight: 600;
 }
 
+/* Hamburger */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Mobile nav hidden by default */
+#nav-menu {
+  display: flex;
+}
+
+@media (max-width: 880px) {
+  .hamburger {
+    display: block;
+    color: #333;
+  }
+
+  #nav-menu {
+    display: none;
+    flex-direction: column;
+    gap: 12px;
+    background: #fafafa;
+    padding: 12px;
+    position: absolute;
+    top: 64px;
+    right: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  #nav-menu.show {
+    display: flex;
+  }
+}
+
 /* Hero */
 .hero {
   display: grid;

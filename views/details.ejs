@@ -32,6 +32,15 @@
         const bg = div.getAttribute("data-bg");
         if (bg) div.style.backgroundImage = `url(${bg})`;
       });
+
+      // menu toggle
+
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("nav-menu");
+
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("show");
+      });
     </script>
   </body>
 </html>

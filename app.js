@@ -12,8 +12,7 @@ const Blog = require("./models/blog");
 const auth = require("./models/auth");
 const { title } = require("process");
 
-// register view engine
-app.set("view engine", "ejs");
+
 
 // express app initialisation
 const app = express();
@@ -58,6 +57,9 @@ mongoose
   .connect(dbURI)
   .then((result) => app.listen(3000) && console.log("connection successful !")) // only listen if connection is made
   .catch((err) => console.log(err));
+  
+// register view engine
+app.set("view engine", "ejs");
 
 // 404 page - always at the bottom
 app.use((req, res) => {

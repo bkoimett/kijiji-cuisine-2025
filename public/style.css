@@ -97,20 +97,70 @@ nav a {
   }
 }
 
+.parallax {
+  background-image: url("./aboutUS.jpg");
+  min-height: 50vh;
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.section {
+  height: 100vh;
+  background: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 /* Hero */
 .hero {
+  /* background-image: url("./aboutUS.jpg"); */
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  color: #fff;
   display: grid;
   grid-template-columns: 1fr 360px;
   gap: 24px;
   align-items: center;
-  padding: 28px 0;
+  position: relative;
+  padding: 0px 0;
 }
+
+/* Optional: Add an overlay for better readability of the text */
+#home::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  /* Semi-transparent overlay */
+  z-index: 1;
+}
+
+/* Make sure the hero content appears above the overlay */
+#home .container {
+  position: relative;
+  z-index: 2;
+}
+
+#home h2,
+#home p {
+  color: #fff;
+  /* Specifically makes the h2 and p elements white */
+}
+
 .hero h2 {
   font-size: 34px;
   margin: 0 0 8px;
 }
 .hero p {
-  color: var(--muted);
+  color: white;
   margin: 0 0 16px;
 }
 .cta {

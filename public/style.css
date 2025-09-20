@@ -280,9 +280,16 @@ form select {
 
 /* Footer */
 footer {
+  background-color: #1f1f24;
+  text-align: left;
   padding: 180px 0;
-  color: var(--muted);
+  color: #f2f2f2;
   font-size: 14px;
+}
+
+.foot {
+  margin: 0 auto;
+  padding: 20px;
 }
 
 /* Responsive */

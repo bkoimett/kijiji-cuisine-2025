@@ -58,12 +58,21 @@ app.use("/blogs", blogRoutes); // since we have scoped out the blogs, it makes t
 // connect to MongoDB
 const dbURI =
   "mongodb+srv://koimettb:1738@nodejstuts.rmg3aqa.mongodb.net/node-tuts?retryWrites=true&w=majority&appName=nodejstuts";
+
 mongoose
   .connect(dbURI)
-  .then((result) => app.listen(3000) && console.log("connection successful !")) // only listen if connection is made
+  .then(() => {
+    const PORT = process.env.PORT || 3000;
+    app.listen(PORT, "0.0.0.0", () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+    console.log("MongoDB connection successful!");
+  })
   .catch((err) => console.log(err));
+
 // register view engine
 app.set("view engine", "ejs");
+
 
 // 404 page - always at the bottom
 app.use((req, res) => {

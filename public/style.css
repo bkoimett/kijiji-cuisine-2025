@@ -99,7 +99,7 @@ nav a {
 
 .parallax {
   background-image: url("./aboutUS.jpg");
-  min-height: 50vh;
+  min-height: 40vh;
 
   background-attachment: fixed;
   background-position: center;

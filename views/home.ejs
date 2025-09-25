@@ -174,6 +174,26 @@
     </main>
 
     <!-- Counter Section -->
+    <section id="counter">
+      <div class="counter-section">
+        <div class="counter-box">
+          <div class="counter-number" data-target="232">0</div>
+          <div class="counter-label">CLIENTS</div>
+        </div>
+        <div class="counter-box">
+          <div class="counter-number" data-target="521">0</div>
+          <div class="counter-label">EVENTS</div>
+        </div>
+        <div class="counter-box">
+          <div class="counter-number" data-target="1453">0</div>
+          <div class="counter-label">HOURS OF SUPPORT</div>
+        </div>
+        <div class="counter-box">
+          <div class="counter-number" data-target="32">0</div>
+          <div class="counter-label">PARTNERS</div>
+        </div>
+      </div>
+    </section>
 
     <!-- Menu Section -->
     <main class="container">
@@ -306,6 +326,27 @@
     <%- include("./partials/footer.ejs") %>
 
     <script>
+      // counter script
+      const counters = document.querySelectorAll(".counter-number");
+      const speed = 200; // lower = faster
+
+      counters.forEach((counter) => {
+        const updateCount = () => {
+          const target = +counter.getAttribute("data-target");
+          const count = +counter.innerText;
+          const increment = Math.ceil(target / speed);
+
+          if (count < target) {
+            counter.innerText = count + increment;
+            setTimeout(updateCount, 30);
+          } else {
+            counter.innerText = target;
+          }
+        };
+
+        updateCount();
+      });
+
       // Populate gallery with placeholders
       (function () {
         const gallery = document.getElementById("galleryGrid");

@@ -325,13 +325,23 @@ h3 {
 /*
 COUNTER
 */
+.parallax-counter {
+  background-image: url("./stats-bg.jpg");
+
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .counter-section {
   background: rgba(0, 0, 0, 0.5);
   display: flex;
   flex-direction: row; /* Horizontal alignment */
   justify-content: center;
   gap: 2rem;
-  padding: 20px;
+  padding: 0px;
   flex-wrap: wrap; /* Wraps on small screens */
 }
 
@@ -346,14 +356,14 @@ COUNTER
 .counter-number {
   font-size: 2.5rem;
   font-weight: bolder;
-  color: #fff;
+  color: #f2f2f2;
 }
 
 .counter-label {
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 5px;
-  color: var(--muted);
+  color: #c7c4c4;
 }
 
 /* Menu accordion */

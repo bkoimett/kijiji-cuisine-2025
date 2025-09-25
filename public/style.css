@@ -209,6 +209,50 @@ h3 {
   box-shadow: 0 6px 18px rgba(20, 20, 20, 0.04);
 }
 
+/* About Us Section */
+.about-section {
+  /* background-color: green; */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: var(--max);
+  padding: 0px;
+  /* margin: 0px; */
+  /* margin: 40px auto; */
+  /* padding: 20px; */
+}
+
+.about-box {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 6px 18px rgba(20, 20, 20, 0.04);
+  padding: 20px;
+}
+
+.about-box img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.about-box h2 {
+  margin: 0 0 12px;
+  color: var(--accent);
+  font-size: 1.5rem;
+}
+
+.about-box p {
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.about-box iframe {
+  width: 100%;
+  height: 220px;
+  border-radius: 8px;
+  border: none;
+}
+
 /* Menu accordion */
 .menu-cat {
   margin-bottom: 12px;

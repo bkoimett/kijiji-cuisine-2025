@@ -55,9 +55,24 @@ const blog_delete = (req, res) => {
     .catch((err) => console.log(err));
 };
 
+// blog_preview
+const blog_preview = (req, res) => {
+  Blog.find()
+    .sort({ createdAt: -1 })
+    .limit(5) // only latest 5 blogs
+    .then((result) => {
+      res.render("partials/blogPreview", { blogs: result });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+
 module.exports = {
   blog_index,
   blog_details,
   blog_create_post,
   blog_delete,
+  blog_preview,
 };

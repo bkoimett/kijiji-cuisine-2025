@@ -28,4 +28,7 @@ router.get("/:id", blogController.blog_details);
 // delete blog route
 router.delete("/:id", blogController.blog_delete);
 
+// blog preview for homepage
+router.get("/preview", blogController.blog_preview);
+
 module.exports = router;

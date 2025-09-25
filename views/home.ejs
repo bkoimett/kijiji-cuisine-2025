@@ -361,131 +361,74 @@
           </div>
         </div>
       </section>
+      <%- include("./partials/blogPreview.ejs") %>
     </main>
 
     <%- include("./partials/footer.ejs") %>
 
     <script>
-            // counter script
-            const counters = document.querySelectorAll(".counter-number");
-            const speed = 200; // lower = faster
+      // counter script
+      const counters = document.querySelectorAll(".counter-number");
+      const speed = 100; // lower = faster
 
-            counters.forEach((counter) => {
-              const updateCount = () => {
-                const target = +counter.getAttribute("data-target");
-                const count = +counter.innerText;
-                const increment = Math.ceil(target / speed);
+      counters.forEach((counter) => {
+        const updateCount = () => {
+          const target = +counter.getAttribute("data-target");
+          const count = +counter.innerText;
+          const increment = Math.ceil(target / speed);
 
-                if (count < target) {
-                  counter.innerText = count + increment;
-                  setTimeout(updateCount, 30);
-                } else {
-                  counter.innerText = target;
-                }
-              };
+          if (count < target) {
+            counter.innerText = count + increment;
+            setTimeout(updateCount, 30);
+          } else {
+            counter.innerText = target;
+          }
+        };
 
-              updateCount();
-            });
+        updateCount();
+      });
 
-            // Populate gallery with placeholders
-
-      <!-- Carousel JS -->
-
-        // decode JSON safely from data attribute
-        const raw = document.getElementById('galleryData').dataset.images || '';
-        const images = raw ? JSON.parse(decodeURIComponent(raw)) : [];
-
-        // elements
-        const thumbs = document.querySelectorAll('#gallery .gallery img');
-        const modal = document.getElementById('carouselModal');
-        const modalImg = document.getElementById('carouselImage');
-        const closeBtn = document.querySelector('.carousel-close');
-        const prevBtn = document.querySelector('.carousel-prev');
-        const nextBtn = document.querySelector('.carousel-next');
-
+      (function () {
         let currentIndex = 0;
 
-        function openCarousel(index) {
-          if (!images.length) return;
-          // ensure index is within bounds
-          currentIndex = Math.max(0, Math.min(index, images.length - 1));
-          modalImg.src = images[currentIndex].imageUrl;
-          modal.style.display = 'block';
-          document.body.style.overflow = 'hidden'; // prevent background scroll
+        window.moveCarousel = function (direction) {
+          const carousel = document.getElementById("blogCarousel");
+          if (!carousel) return;
+
+          const cardCount = carousel.children.length;
+          const visibleCards = getVisibleCards(); // how many fit per view
+
+          // max index = total cards - visible per view
+          const maxIndex = Math.max(0, cardCount - visibleCards);
+
+          currentIndex = Math.min(
+            Math.max(currentIndex + direction, 0),
+            maxIndex
+          );
+
+          const cardWidth = carousel.children[0].offsetWidth + 20; // width + margin
+          carousel.style.transform = `translateX(-${
+            currentIndex * cardWidth
+          }px)`;
+        };
+
+        function getVisibleCards() {
+          if (window.innerWidth <= 480) return 1;
+          if (window.innerWidth <= 768) return 2;
+          return 3;
         }
 
-        // thumbnails (only up to 6 are in DOM)
-        thumbs.forEach(t => {
-          t.addEventListener('click', () => {
-            const idx = parseInt(t.dataset.index, 10);
-            openCarousel(Number.isNaN(idx) ? 0 : idx);
-          });
+        // Initialize background images
+        document.querySelectorAll(".card-image").forEach((div) => {
+          const bg = div.getAttribute("data-bg");
+          if (bg) div.style.backgroundImage = `url(${bg})`;
         });
 
-        // controls
-        closeBtn.addEventListener('click', () => {
-          modal.style.display = 'none';
-          document.body.style.overflow = '';
-        });
-
-        prevBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          openCarousel((currentIndex - 1 + images.length) % images.length);
-        });
-
-        nextBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          openCarousel((currentIndex + 1) % images.length);
-        });
-
-        // clicking outside image closes
-        modal.addEventListener('click', (e) => {
-          if (e.target === modal) {
-            modal.style.display = 'none';
-            document.body.style.overflow = '';
-          }
-        });
-
-        // keyboard navigation
-        document.addEventListener('keydown', (e) => {
-          if (modal.style.display !== 'block') return;
-          if (e.key === 'ArrowLeft') prevBtn.click();
-          if (e.key === 'ArrowRight') nextBtn.click();
-          if (e.key === 'Escape') closeBtn.click();
-        });
-
-
-            function togglePanel(btn) {
-              const panel = btn.nextElementSibling;
-              if (!panel) return;
-              const open = panel.style.display === "block";
-              document
-                .querySelectorAll(".menu-cat .panel")
-                .forEach((p) => (p.style.display = "none"));
-              if (!open) panel.style.display = "block";
-            }
-
-            function handleBooking(e) {
-              e.preventDefault();
-              const form = e.currentTarget;
-              const data = Object.fromEntries(new FormData(form).entries());
-              const msg = document.getElementById("bookingMsg");
-              msg.textContent = "Loading";
-              setTimeout(() => {
-                msg.textContent =
-                  "Your booking request was sent. We will call or send an email to confirm. Thank you!";
-                form.reset();
-              }, 800);
-            }
-
-            // menu toggle
-
-            const hamburger = document.getElementById("hamburger");
-            const navMenu = document.getElementById("nav-menu");
-
-            hamburger.addEventListener("click", () => {
-              navMenu.classList.toggle("show");
-            });
+        // Auto-slide every 5s
+        setInterval(() => {
+          moveCarousel(1);
+        }, 5000);
+      })();
     </script>
   </body>
 </html>

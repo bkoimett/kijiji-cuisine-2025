@@ -38,13 +38,14 @@ app.use(
 
 // route handlers
 // in app.js or your router
-app.get('/', async (req, res) => {
+app.get("/", async (req, res) => {
   try {
-    const images = await Image.find().sort({ uploadedAt: -1 }); // fetch all
-    res.render('home', { title: 'Home', images });
+    const images = await Image.find().sort({ uploadedAt: -1 });
+    const blogs = await Blog.find().sort({ createdAt: -1 }).limit(5); // latest 5 blogs
+    res.render("home", { title: "Home", images, blogs });
   } catch (err) {
     console.error(err);
-    res.render('home', { title: 'Home', images: [] });
+    res.render("home", { title: "Home", images: [], blogs: [] });
   }
 });
 

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section id="blog-carousel-section">
+
+      <% if (blogs.length > 0) { %>
+      <div class="carousel-container">
+        <div class="carousel" id="blogCarousel">
+          <% blogs.forEach(blog => { %>
+          <a
+            href="/blogs/<%= blog._id %>"
+            class="card blog-card"
+            style="text-decoration: none; color: inherit"
+          >
+            <!-- Card Image -->
+            <div
+              class="card-image"
+              data-bg="<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/200x150.png?text=No+Image' %>"
+            ></div>
+
+            <!-- Card Content -->
+            <div class="card-content">
+              <p class="muted">
+                By Alex Milenye | <%= blog.createdAt.toDateString() %>
+              </p>
+              <h3><%= blog.title %></h3>
+              <p class="snippet"><%= blog.snippet %></p>
+            </div>
+          </a>
+          <% }) %>
+        </div>
+
+        <!-- Controls -->
+        <button class="carousel-btn prev" onclick="moveCarousel(-1)">
+          &#10094;
+        </button>
+        <button class="carousel-btn next" onclick="moveCarousel(1)">
+          &#10095;
+        </button>
+      </div>
+      <% } else { %>
+      <p>There are no blogs to display...</p>
+      <% } %>
+    </section>
+
+    <script>
+      document.querySelectorAll(".card-image").forEach((div) => {
+        const bg = div.getAttribute("data-bg");
+        if (bg) div.style.backgroundImage = `url(${bg})`;
+      });
+
+      const hamburger = document.getElementById("hamburger");
+      const navMenu = document.getElementById("nav-menu");
+
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("show");
+      });
+
+      (function () {
+        let currentIndex = 0;
+
+        window.moveCarousel = function (direction) {
+          const carousel = document.getElementById("blogCarousel");
+          if (!carousel) return;
+
+          const cardCount = carousel.children.length;
+          const visibleCards = getVisibleCards(); // how many fit per view
+
+          // max index = total cards - visible per view
+          const maxIndex = Math.max(0, cardCount - visibleCards);
+
+          currentIndex = Math.min(
+            Math.max(currentIndex + direction, 0),
+            maxIndex
+          );
+
+          const cardWidth = carousel.children[0].offsetWidth + 20; // width + margin
+          carousel.style.transform = `translateX(-${
+            currentIndex * cardWidth
+          }px)`;
+        };
+
+        function getVisibleCards() {
+          if (window.innerWidth <= 480) return 1;
+          if (window.innerWidth <= 768) return 2;
+          return 3;
+        }
+
+        // Initialize background images
+        document.querySelectorAll(".card-image").forEach((div) => {
+          const bg = div.getAttribute("data-bg");
+          if (bg) div.style.backgroundImage = `url(${bg})`;
+        });
+
+        // Auto-slide every 5s
+        setInterval(() => {
+          moveCarousel(1);
+        }, 5000);
+      })();
+    </script>
+  </body>
+</html>

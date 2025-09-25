@@ -5,8 +5,12 @@
 
     <main class="container">
       <h2>Admin Dashboard</h2>
-      <a href="/admin/blogs/create" class="btn" style="margin-bottom: 20px;">+ New Blog</a>
-      <a href="/gallery" class="btn" style="margin-bottom: 20px;">+ Upload Photos</a>
+      <a href="/admin/blogs/create" class="btn" style="margin-bottom: 20px"
+        >+ New Blog</a
+      >
+      <a href="/gallery" class="btn" style="margin-bottom: 20px"
+        >+ Upload Photos</a
+      >
       <!-- ✅ FIXED -->
 
       <% if (blogs.length > 0) { %>
@@ -31,7 +35,12 @@
               method="POST"
               style="display: inline"
             >
-              <button type="submit" class="delete">Delete</button>
+              <a href="#" class="delete" data-doc="<%= blog._id %>">
+                <img
+                  src="/trash.png"
+                  alt="delete"
+                  style="width: 18px; vertical-align: middle; margin-right: 6px"
+                /></a>
             </form>
           </div>
         </div>
@@ -41,5 +50,6 @@
       <p>No blogs created yet.</p>
       <% } %>
     </main>
+    <%- include("./partials/footer.ejs") %>
   </body>
 </html>

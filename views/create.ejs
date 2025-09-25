@@ -6,7 +6,7 @@
     <div class="strip">
       <div class="container-strip">
         <div class="container">
-          <h2 style="color: white">Admin Dashboard</h2>
+          <h2 style="color: white">Create New Blog</h2>
           <a href="/admin/blogs/create" class="btn" style="margin-bottom: 20px"
             >+ New Blog</a
           >
@@ -19,7 +19,7 @@
         </div>
       </div>
     </div>
-    <main class="form-container" style="margin-top: 20px">
+    <main class="form-container" style="margin-top: 20px; margin-bottom: 20px">
       <div class="create-blog content">
         <form action="/blogs" method="POST" enctype="multipart/form-data">
           <label for="title">Blog title:</label>
@@ -62,6 +62,6 @@
         navMenu.classList.toggle("show");
       });
     </script>
-    <%- include("./partials/footer.ejs") %>
+
   </body>
 </html>

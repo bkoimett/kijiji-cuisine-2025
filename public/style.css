@@ -345,12 +345,13 @@ COUNTER
 
 .counter-number {
   font-size: 2.5rem;
-  font-weight: bold;
+  font-weight: bolder;
   color: #fff;
 }
 
 .counter-label {
   font-size: 1.1rem;
+  font-weight: bold;
   margin-top: 5px;
   color: var(--muted);
 }

@@ -2,10 +2,18 @@
   <%- include("./partials/head.ejs") %>
   <body>
     <%- include("./partials/nav.ejs") %>
-
+    <div class="strip">
+      <div class="container-strip">
+        <div class="container">
+          <h2 style="color: white">All Blogs</h2>
+          <p style="color: #f2f2f2">
+            From trending recipes to expert catering advice, our blog serves up
+            everything you need to inspire your next gathering.
+          </p>
+        </div>
+      </div>
+    </div>
     <main class="container">
-      <h2>All Blogs</h2>
-
       <% if (blogs.length > 0) { %>
       <div class="grid-3">
         <% blogs.forEach(blog => { %>

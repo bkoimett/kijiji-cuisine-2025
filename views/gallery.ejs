@@ -3,20 +3,45 @@
   <%- include("./partials/head.ejs") %>
   <body>
     <%- include("./partials/header.ejs") %>
+
+    <div class="strip">
+      <div class="container-strip">
+        <div class="container">
+          <h2 style="color: #f2f2f2">Blog Gallery</h2>
+
+          <!-- Upload Form -->
+          <form
+            class="blog-gallery-upload"
+            action="/gallery/upload"
+            method="POST"
+            enctype="multipart/form-data"
+          >
+            <input
+              type="file"
+              name="image"
+              required
+              style="
+                display: inline-block;
+                padding: 15px 5px;
+                border: 2px solid #ccc;
+                border-radius: 8px;
+                background-color: #fff;
+                cursor: pointer;
+                font-size: 1rem;
+                transition: all 0.2s ease;
+                margin-bottom: 8px;
+              "
+              onmouseover="this.style.borderColor='#ce1212'; this.style.boxShadow='0 4px 10px rgba(0,0,0,0.1)';"
+              onmouseout="this.style.borderColor='#ccc'; this.style.boxShadow='none';"
+            />
+
+            <button type="submit" class="btn">Upload</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <section id="blog-gallery" class="container">
-      <h3>Blog Gallery</h3>
-
-      <!-- Upload Form -->
-      <form
-        class="blog-gallery-upload"
-        action="/gallery/upload"
-        method="POST"
-        enctype="multipart/form-data"
-      >
-        <input type="file" name="image" required />
-        <button type="submit" class="btn">Upload</button>
-      </form>
-
       <!-- Gallery Grid -->
       <div class="blog-gallery-grid">
         <% images.forEach(img => { %>
@@ -25,7 +50,7 @@
           style="border: 0px; background-color: #f2f2f2; box-shadow: none"
         >
           <img src="<%= img.imageUrl %>" alt="Image" />
-          <form action="/gallery/delete/<%= img._id %>" method="POST" >
+          <form action="/gallery/delete/<%= img._id %>" method="POST">
             <div>
               <button type="submit" class="delete">Delete</button>
             </div>
@@ -34,5 +59,6 @@
         <% }) %>
       </div>
     </section>
+    <%- include("./partials/footer.ejs") %>
   </body>
 </html>

@@ -3,17 +3,24 @@
   <body>
     <%- include("./partials/nav.ejs") %>
 
+    <div class="strip">
+      <div class="container-strip">
+        <div class="container">
+          <h2 style="color: white;">Admin Dashboard</h2>
+          <a href="/admin/blogs/create" class="btn" style="margin-bottom: 20px"
+            >+ New Blog</a
+          >
+          <a href="/signup" class="btn" style="margin-bottom: 20px"
+            >+ New User</a
+          >
+          <a href="/gallery" class="btn" style="margin-bottom: 20px"
+            >+ Upload Photos</a
+          >
+        </div>
+      </div>
+    </div>
+
     <main class="container">
-      <h2>Admin Dashboard</h2>
-      <a href="/admin/blogs/create" class="btn" style="margin-bottom: 20px"
-        >+ New Blog</a
-      >
-      <a href="/signup" class="btn" style="margin-bottom: 20px"
-        >+ New User</a
-      >
-      <a href="/gallery" class="btn" style="margin-bottom: 20px"
-        >+ Upload Photos</a
-      >
       <!-- ✅ FIXED -->
 
       <% if (blogs.length > 0) { %>
@@ -42,8 +49,12 @@
                 <img
                   src="/trash.png"
                   alt="delete"
-                  style="width: 18px; vertical-align: middle; margin-right: 6px"
-                /></a>
+                  style="
+                    width: 18px;
+                    vertical-align: middle;
+                    margin-right: 6px;
+                  "
+              /></a>
             </form>
           </div>
         </div>

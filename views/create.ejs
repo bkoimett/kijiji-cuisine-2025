@@ -3,7 +3,22 @@
 
   <body>
     <%- include("./partials/nav.ejs") %>
-
+    <div class="strip">
+      <div class="container-strip">
+        <div class="container">
+          <h2 style="color: white">Admin Dashboard</h2>
+          <a href="/admin/blogs/create" class="btn" style="margin-bottom: 20px"
+            >+ New Blog</a
+          >
+          <a href="/signup" class="btn" style="margin-bottom: 20px"
+            >+ New User</a
+          >
+          <a href="/gallery" class="btn" style="margin-bottom: 20px"
+            >+ Upload Photos</a
+          >
+        </div>
+      </div>
+    </div>
     <main class="form-container" style="margin-top: 20px">
       <div class="create-blog content">
         <form action="/blogs" method="POST" enctype="multipart/form-data">
@@ -47,5 +62,6 @@
         navMenu.classList.toggle("show");
       });
     </script>
+    <%- include("./partials/footer.ejs") %>
   </body>
 </html>

@@ -791,3 +791,16 @@ footer {
     flex: 0 0 100%; /* 1 per view */
   }
 }
+
+.container-strip {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.strip {
+  background-image: url("./stats-bg.jpg");
+
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}

@@ -303,6 +303,25 @@ h3 {
     grid-template-columns: 1fr;
   }
 }
+
+/*partners*/
+.image-card {
+  width: 80%;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  max-width: 700;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.image-card img {
+  width: 100%; /* scales with width */
+  height: auto; /* keeps aspect ratio */
+  display: block;
+  border-radius: 8px;
+}
+
 /* Menu accordion */
 .menu-cat {
   margin-bottom: 12px;

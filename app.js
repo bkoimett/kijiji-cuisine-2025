@@ -7,10 +7,13 @@ const path = require("path");
 const session = require("express-session");
 
 // module imports
+
 const galleryRoutes = require("./routes/galleryRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+
+const Image = require("./models/image"); // make sure this is correct path
 const Blog = require("./models/blog");
 const auth = require("./models/auth");
 const { title } = require("process");
@@ -34,9 +37,17 @@ app.use(
 );
 
 // route handlers
-app.get("/", (req, res) => {
-  res.render("home", { title: "Home" });
+// in app.js or your router
+app.get('/', async (req, res) => {
+  try {
+    const images = await Image.find().sort({ uploadedAt: -1 }); // fetch all
+    res.render('home', { title: 'Home', images });
+  } catch (err) {
+    console.error(err);
+    res.render('home', { title: 'Home', images: [] });
+  }
 });
+
 
 app.get("/about", (req, res) => {
   res.render("about", { title: "About" });
@@ -76,7 +87,6 @@ mongoose
 
 // register view engine
 app.set("view engine", "ejs");
-
 
 // 404 page - always at the bottom
 app.use((req, res) => {

@@ -272,14 +272,46 @@
           </div>
         </div>
       </section>
+
+      <!-- Gallery Section-->
       <section id="gallery">
         <h3>Gallery</h3>
         <div class="card">
-          <div class="gallery" id="galleryGrid">
-            <!-- JS will populate sample images -->
+          <div class="gallery">
+            <% images.slice(0, 6).forEach((img, i) => { %>
+            <!-- thumbnail: data-index corresponds to position inside `images` array -->
+            <img
+              src="<%= img.imageUrl %>"
+              alt="Gallery image"
+              data-index="<%= i %>"
+            />
+            <% }) %> <% if (images.length > 6) { %>
+            <div class="more-overlay" role="button" onclick="openCarousel(6)">
+              +<%= images.length - 6 %> more
+            </div>
+            <% } %>
           </div>
         </div>
       </section>
+
+      <!-- Hidden encoded JSON data (safe) -->
+      <div
+        id="galleryData"
+        style="display: none"
+        data-images="<%= encodeURIComponent(JSON.stringify(images)) %>"
+      ></div>
+
+      <!-- Carousel Modal -->
+      <div id="carouselModal" class="carousel-modal" style="display: none">
+        <span class="carousel-close" aria-label="Close">&times;</span>
+        <img
+          class="carousel-content"
+          id="carouselImage"
+          alt="Full size image"
+        />
+        <a class="carousel-prev" aria-label="Previous">&#10094;</a>
+        <a class="carousel-next" aria-label="Next">&#10095;</a>
+      </div>
 
       <section id="contact">
         <h3>Book an Event</h3>
@@ -334,70 +366,126 @@
     <%- include("./partials/footer.ejs") %>
 
     <script>
-      // counter script
-      const counters = document.querySelectorAll(".counter-number");
-      const speed = 200; // lower = faster
+            // counter script
+            const counters = document.querySelectorAll(".counter-number");
+            const speed = 200; // lower = faster
 
-      counters.forEach((counter) => {
-        const updateCount = () => {
-          const target = +counter.getAttribute("data-target");
-          const count = +counter.innerText;
-          const increment = Math.ceil(target / speed);
+            counters.forEach((counter) => {
+              const updateCount = () => {
+                const target = +counter.getAttribute("data-target");
+                const count = +counter.innerText;
+                const increment = Math.ceil(target / speed);
 
-          if (count < target) {
-            counter.innerText = count + increment;
-            setTimeout(updateCount, 30);
-          } else {
-            counter.innerText = target;
-          }
-        };
+                if (count < target) {
+                  counter.innerText = count + increment;
+                  setTimeout(updateCount, 30);
+                } else {
+                  counter.innerText = target;
+                }
+              };
 
-        updateCount();
-      });
+              updateCount();
+            });
 
-      // Populate gallery with placeholders
-      (function () {
-        const gallery = document.getElementById("galleryGrid");
-        const count = 12;
-        for (let i = 1; i <= count; i++) {
-          const img = document.createElement("img");
-          img.src = "https://picsum.photos/seed/kijiji" + i + "/600/400";
-          img.alt = "Gallery " + i;
-          gallery.appendChild(img);
+            // Populate gallery with placeholders
+
+      <!-- Carousel JS -->
+
+        // decode JSON safely from data attribute
+        const raw = document.getElementById('galleryData').dataset.images || '';
+        const images = raw ? JSON.parse(decodeURIComponent(raw)) : [];
+
+        // elements
+        const thumbs = document.querySelectorAll('#gallery .gallery img');
+        const modal = document.getElementById('carouselModal');
+        const modalImg = document.getElementById('carouselImage');
+        const closeBtn = document.querySelector('.carousel-close');
+        const prevBtn = document.querySelector('.carousel-prev');
+        const nextBtn = document.querySelector('.carousel-next');
+
+        let currentIndex = 0;
+
+        function openCarousel(index) {
+          if (!images.length) return;
+          // ensure index is within bounds
+          currentIndex = Math.max(0, Math.min(index, images.length - 1));
+          modalImg.src = images[currentIndex].imageUrl;
+          modal.style.display = 'block';
+          document.body.style.overflow = 'hidden'; // prevent background scroll
         }
-      })();
 
-      function togglePanel(btn) {
-        const panel = btn.nextElementSibling;
-        if (!panel) return;
-        const open = panel.style.display === "block";
-        document
-          .querySelectorAll(".menu-cat .panel")
-          .forEach((p) => (p.style.display = "none"));
-        if (!open) panel.style.display = "block";
-      }
+        // thumbnails (only up to 6 are in DOM)
+        thumbs.forEach(t => {
+          t.addEventListener('click', () => {
+            const idx = parseInt(t.dataset.index, 10);
+            openCarousel(Number.isNaN(idx) ? 0 : idx);
+          });
+        });
 
-      function handleBooking(e) {
-        e.preventDefault();
-        const form = e.currentTarget;
-        const data = Object.fromEntries(new FormData(form).entries());
-        const msg = document.getElementById("bookingMsg");
-        msg.textContent = "Loading";
-        setTimeout(() => {
-          msg.textContent =
-            "Your booking request was sent. We will call or send an email to confirm. Thank you!";
-          form.reset();
-        }, 800);
-      }
+        // controls
+        closeBtn.addEventListener('click', () => {
+          modal.style.display = 'none';
+          document.body.style.overflow = '';
+        });
 
-      // menu toggle
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openCarousel((currentIndex - 1 + images.length) % images.length);
+        });
 
-      const hamburger = document.getElementById("hamburger");
-      const navMenu = document.getElementById("nav-menu");
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          openCarousel((currentIndex + 1) % images.length);
+        });
 
-      hamburger.addEventListener("click", () => {
-        navMenu.classList.toggle("show");
-      });
+        // clicking outside image closes
+        modal.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+          }
+        });
+
+        // keyboard navigation
+        document.addEventListener('keydown', (e) => {
+          if (modal.style.display !== 'block') return;
+          if (e.key === 'ArrowLeft') prevBtn.click();
+          if (e.key === 'ArrowRight') nextBtn.click();
+          if (e.key === 'Escape') closeBtn.click();
+        });
+
+
+            function togglePanel(btn) {
+              const panel = btn.nextElementSibling;
+              if (!panel) return;
+              const open = panel.style.display === "block";
+              document
+                .querySelectorAll(".menu-cat .panel")
+                .forEach((p) => (p.style.display = "none"));
+              if (!open) panel.style.display = "block";
+            }
+
+            function handleBooking(e) {
+              e.preventDefault();
+              const form = e.currentTarget;
+              const data = Object.fromEntries(new FormData(form).entries());
+              const msg = document.getElementById("bookingMsg");
+              msg.textContent = "Loading";
+              setTimeout(() => {
+                msg.textContent =
+                  "Your booking request was sent. We will call or send an email to confirm. Thank you!";
+                form.reset();
+              }, 800);
+            }
+
+            // menu toggle
+
+            const hamburger = document.getElementById("hamburger");
+            const navMenu = document.getElementById("nav-menu");
+
+            hamburger.addEventListener("click", () => {
+              navMenu.classList.toggle("show");
+            });
     </script>
   </body>
 </html>

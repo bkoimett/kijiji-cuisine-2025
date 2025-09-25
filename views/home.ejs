@@ -286,41 +286,46 @@
           Fill out the form and we'll call or email to confirm your reservation.
         </p>
 
-        <div class="card" style="margin-top: 10px">
-          <form id="bookingForm" onsubmit="handleBooking(event)">
-            <div class="row">
-              <input name="name" placeholder="Full name" required />
-              <input name="phone" placeholder="Phone number" required />
-            </div>
-            <div style="margin-top: 8px">
-              <input name="email" placeholder="Email (optional)" />
-            </div>
-            <div style="margin-top: 8px">
-              <select name="package">
-                <option value="platinum">Platinum</option>
-                <option value="gold">Gold</option>
-                <option value="bronze">Bronze</option>
-              </select>
-            </div>
-            <div style="margin-top: 8px">
-              <textarea
-                name="details"
-                rows="4"
-                placeholder="Event details (date, number of guests, location)"
-              ></textarea>
-            </div>
-            <div
-              style="
-                margin-top: 12px;
-                display: flex;
-                gap: 10px;
-                align-items: center;
-              "
-            >
-              <button class="btn" type="submit">Send Booking</button>
-              <div id="bookingMsg" style="color: var(--muted)"></div>
-            </div>
-          </form>
+        <div class="about-section">
+          <div class="about-box" style="background:none;padding: 0px;">
+            <img src="aboutUS.jpg" alt="Company Image" />
+          </div>
+          <div class="about-box" >
+            <form id="bookingForm" onsubmit="handleBooking(event)">
+              <div class="row">
+                <input name="name" placeholder="Full name" required />
+                <input name="phone" placeholder="Phone number" required />
+              </div>
+              <div style="margin-top: 8px">
+                <input name="email" placeholder="Email (optional)" />
+              </div>
+              <div style="margin-top: 8px">
+                <select name="package">
+                  <option value="platinum">Platinum</option>
+                  <option value="gold">Gold</option>
+                  <option value="bronze">Bronze</option>
+                </select>
+              </div>
+              <div style="margin-top: 8px">
+                <textarea
+                  name="details"
+                  rows="4"
+                  placeholder="Event details (date, number of guests, location)"
+                ></textarea>
+              </div>
+              <div
+                style="
+                  margin-top: 12px;
+                  display: flex;
+                  gap: 10px;
+                  align-items: center;
+                "
+              >
+                <button class="btn" type="submit">Send Booking</button>
+                <div id="bookingMsg" style="color: var(--muted)"></div>
+              </div>
+            </form>
+          </div>
         </div>
       </section>
     </main>

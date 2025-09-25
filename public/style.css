@@ -253,6 +253,56 @@ h3 {
   border: none;
 }
 
+/* ============================= */
+/* WHY-US FEATURE CARDS          */
+/* ============================= */
+.card.feature {
+  padding: 20px;
+  border: 1px solid #eee;
+  text-align: center;
+  background: #fff;
+}
+
+.card.feature h3,
+.card.feature h4 {
+  color: var(--accent);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.card.feature p {
+  color: var(--muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.card.feature i {
+  font-size: 32px;
+  color: var(--accent);
+  margin-bottom: 10px;
+  display: block;
+}
+
+/* ============================= */
+/* WHY-US SECTION LAYOUT         */
+/* ============================= */
+.why-us {
+  background: #fff;
+}
+
+.grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+/* Responsive */
+@media (max-width: 880px) {
+  .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
 /* Menu accordion */
 .menu-cat {
   margin-bottom: 12px;

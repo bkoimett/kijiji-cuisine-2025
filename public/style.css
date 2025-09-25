@@ -719,12 +719,6 @@ footer {
 }
 
 /* blog */
-#blog-carousel-section {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 1rem;
-}
-
 .carousel-container {
   position: relative;
   overflow: hidden;
@@ -736,7 +730,7 @@ footer {
 }
 
 .blog-card {
-  flex: 0 0 33.333%; /* 3 cards per view */
+  flex: 0 0 50%; /* 3 cards per view */
   box-sizing: border-box;
   margin: 0 10px;
   background: #fff;
@@ -753,7 +747,7 @@ footer {
 }
 
 .card-content {
-  padding: 12px;
+  padding: 8px;
 }
 
 .card-content h3 {
@@ -767,13 +761,13 @@ footer {
 
 .carousel-btn {
   position: absolute;
-  top: 40%;
+  top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.5);
   border: none;
   color: #fff;
   font-size: 1.5rem;
-  padding: 8px 12px;
+  padding: 4px 12px;
   cursor: pointer;
   border-radius: 50%;
 }
@@ -786,7 +780,7 @@ footer {
 }
 
 /* Responsive: fewer cards on small screens */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .blog-card {
     flex: 0 0 50%; /* 2 per view */
   }

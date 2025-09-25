@@ -6,7 +6,7 @@
     <title>Document</title>
   </head>
   <body>
-    <section id="blog-carousel-section">
+
 
       <% if (blogs.length > 0) { %>
       <div class="carousel-container">
@@ -46,7 +46,7 @@
       <% } else { %>
       <p>There are no blogs to display...</p>
       <% } %>
-    </section>
+
 
     <script>
       document.querySelectorAll(".card-image").forEach((div) => {
@@ -61,6 +61,7 @@
         navMenu.classList.toggle("show");
       });
 
+      // blog preview script
       (function () {
         let currentIndex = 0;
 

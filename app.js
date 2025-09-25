@@ -7,6 +7,7 @@ const path = require("path");
 const session = require("express-session");
 
 // module imports
+const galleryRoutes = require("./routes/galleryRoutes");
 const blogRoutes = require("./routes/blogRoutes");
 const authRoutes = require("./routes/authRoutes");
 const adminRoutes = require("./routes/adminRoutes");
@@ -51,6 +52,9 @@ app.use(authRoutes);
 app.get("/create", (req, res) => {
   res.render("create", { title: "Create a new blog" });
 });
+
+// gallery routes
+app.use("/gallery", galleryRoutes);
 
 // blog routes
 app.use("/blogs", blogRoutes); // since we have scoped out the blogs, it makes the routes reusable

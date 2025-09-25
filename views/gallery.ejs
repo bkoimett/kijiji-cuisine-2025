@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("./partials/head.ejs") %>
+  <body>
+    <%- include("./partials/header.ejs") %>
+    <section id="blog-gallery" class="container">
+      <h3>Blog Gallery</h3>
+
+      <!-- Upload Form -->
+      <form
+        class="blog-gallery-upload"
+        action="/gallery/upload"
+        method="POST"
+        enctype="multipart/form-data"
+      >
+        <input type="file" name="image" required />
+        <button type="submit" class="btn">Upload</button>
+      </form>
+
+      <!-- Gallery Grid -->
+      <div class="blog-gallery-grid">
+        <% images.forEach(img => { %>
+        <div
+          class="blog-gallery-item card"
+          style="border: 0px; background-color: #f2f2f2; box-shadow: none"
+        >
+          <img src="<%= img.imageUrl %>" alt="Image" />
+          <form action="/gallery/delete/<%= img._id %>" method="POST" >
+            <div>
+              <button type="submit" class="delete">Delete</button>
+            </div>
+          </form>
+        </div>
+        <% }) %>
+      </div>
+    </section>
+  </body>
+</html>

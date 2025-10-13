@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
 
+
 // module imports
 
 const galleryRoutes = require("./routes/galleryRoutes");
@@ -23,10 +24,12 @@ const app = express();
 
 // middleware and static - for all req including post
 app.use(express.static("public"));
+app.use("/uploads", express.static(path.join(__dirname, "public/uploads")));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 app.use(morgan("dev"));
+
 
 app.use(
   session({
@@ -35,6 +38,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+
 
 // route handlers
 // in app.js or your router

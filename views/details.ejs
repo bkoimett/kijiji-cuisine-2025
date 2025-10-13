@@ -9,10 +9,16 @@
         <!-- <div class="card-image large <%= blog.image ? '' : 'no-img' %>"
              style="background-image:url(<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/800x400.png?text=No+Image' %>)">
         </div> -->
-        <div
-          class="card-image"
-          data-bg="<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/200x150.png?text=No+Image' %>"
-        ></div>
+        <img
+          src="<%= blog.image ? '/uploads/' + blog.image : 'https://via.placeholder.com/800x400.png?text=No+Image' %>"
+          alt="<%= blog.title %>"
+          style="
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+          "
+        />
 
         <!-- Blog Content -->
         <div class="card-content">

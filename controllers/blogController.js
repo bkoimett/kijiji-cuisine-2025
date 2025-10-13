@@ -1,5 +1,6 @@
 const Blog = require("../models/blog");
-const path = require("path")
+const path = require("path");
+const mongoose = require("mongoose");
 
 // blog_index
 const blog_index = (req, res) => {
@@ -16,13 +17,18 @@ const blog_index = (req, res) => {
 // blog_details
 const blog_details = (req, res) => {
   const id = req.params.id;
+
+  // ✅ Avoid CastError for invalid ObjectId
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).send("Invalid blog ID");
+  }
+
   Blog.findById(id)
     .then((result) => {
+      if (!result) return res.status(404).send("Blog not found");
       res.render("details", { blog: result, title: "Blog Details" });
     })
-    .catch((err) => {
-      console.log(err);
-    });
+    .catch((err) => console.log(err));
 };
 
 // blog_create_post
@@ -67,7 +73,6 @@ const blog_preview = (req, res) => {
       console.log(err);
     });
 };
-
 
 module.exports = {
   blog_index,

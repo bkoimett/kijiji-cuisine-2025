@@ -6,7 +6,7 @@
     <div class="strip">
       <div class="container-strip">
         <div class="container">
-          <h2 style="color: white;">Admin Dashboard</h2>
+          <h2 style="color: white">Admin Dashboard</h2>
           <a href="/admin/blogs/create" class="btn" style="margin-bottom: 20px"
             >+ New Blog</a
           >
@@ -45,16 +45,17 @@
               method="POST"
               style="display: inline"
             >
-              <a href="#" class="delete" data-doc="<%= blog._id %>">
+              <button
+                type="submit"
+                style="background: none; border: none; cursor: pointer"
+                title="Delete"
+              >
                 <img
                   src="/trash.png"
                   alt="delete"
-                  style="
-                    width: 18px;
-                    vertical-align: middle;
-                    margin-right: 6px;
-                  "
-              /></a>
+                  style="width: 18px; vertical-align: middle; margin-right: 6px"
+                />
+              </button>
             </form>
           </div>
         </div>
